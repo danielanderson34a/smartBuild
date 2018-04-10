@@ -1,0 +1,80 @@
+/* Your app styles here */
+
+/* Left Panel right border when it is visible by breakpoint */
+.panel-left.panel-visible-by-breakpoint:before {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: rgba(0,0,0,0.1);
+  content: '';
+  z-index: 6000;
+}
+
+/* Hide navbar link which opens left panel when it is visible by breakpoint */
+.panel-left.panel-visible-by-breakpoint ~ .view .navbar .panel-open[data-panel="left"] {
+  display: none;
+}
+
+/*
+  Extra borders for main view and left panel for iOS theme when it behaves as panel (before breakpoint size)
+*/
+.ios .panel-left:not(.panel-visible-by-breakpoint).panel-active ~ .view-main:before,
+.ios .panel-left:not(.panel-visible-by-breakpoint).panel-closing ~ .view-main:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: rgba(0,0,0,0.1);
+  content: '';
+  z-index: 6000;
+}
+.item-titles{
+  font-size: 40px;
+}
+/* #div1 {
+  height: auto;
+}
+#div2 {
+  height: auto;
+ }
+#div3 {
+  height: auto;
+ }
+#div4 {
+  height: auto;
+ } */
+#newline {
+  break-before: left;
+}
+ .SmartBuild-swiper .swiper-slide {
+   font-size: 25px;
+   font-weight: 300;
+   /* display: flex; */
+   /* justify-content: center; */
+   /* align-items: center; */
+   background-color: rgba(255, 0, 0, 0.25);
+   color: #000;
+ }
+
+ .SmartBuild-swiper .swiper-slide {
+   box-sizing: border-box;
+   border: 1px solid #ddd;
+   background: #fff;
+ }
+ .SmartBuild-swiper {
+   margin: 0px 0 35px;
+   font-size: 18px;
+   height: 100%;
+ }
+ .SmartBuild-swiper .Smart-auto-auto .swiper-slide {
+   width: 85%;
+ }
+ .SmartBuild-swiper .SmartBuild-swiper-auto .swiper-slide:nth-child(2n) {
+   width: 70%;
+ }
+ .SmartBuild-swiper .SmartBuild-swiper-auto .swiper-slide:nth-child(3n) {
+   width: 30%;
+ }
