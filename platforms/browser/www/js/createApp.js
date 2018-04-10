@@ -1,7 +1,7 @@
-function initDb1(db) {
-  db.executeSql('CREATE TABLE IF NOT EXISTS APPLICATION (applicationID integer primary key autoincrement, userID, foreName, surname, address, townland, town, postcode, tel, appEmail, description, floorArea, water, amount, disability, plans, signature, date, app-status, inspectionTime, inspection-status)');
-console.log("app table created");
-}
+// function initDb1(db) {
+//   db.executeSql('CREATE TABLE IF NOT EXISTS APPLICATION (applicationID integer primary key autoincrement, userID, foreName, surname, address, townland, town, postcode, tel, appEmail, description, floorArea, water, amount, disability, plans, signature, date, app-status, inspectionTime, inspection-status)');
+// console.log("app table created");
+// }
 
 function createApplication() {
 

@@ -30,12 +30,11 @@ console.log('test1');
     console.log(results.rows);
 
 
-    if (results.rows.item(0) === null) {
+    if (results.rows.item(0) === 0) {
       app.dialog.alert('Invalid credentials');
     } else {
       console.log('success');
 
-      console.log(results.rows.item(0));
 
       window.sessionStorage.user = JSON.stringify(results.rows.item(0));
 

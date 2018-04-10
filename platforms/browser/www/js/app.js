@@ -87,19 +87,28 @@ $$(document).on('page:init', function(e) {
   console.log("Device is ready!");
 // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
-  db.transaction(initDb);
-  db.transaction(initDb1);
+  db.transaction(initDb, initDb2);
   console.log("Database opened");
 
 });
 
 // create user table
-function initDb(db) {
-  db.executeSql('CREATE TABLE IF NOT EXISTS USER (id integer primary key autoincrement, firstName, lastName, userName, email, password, gender, dob, job)');
-  //db.executeSql('CREATE TABLE IF NOT EXISTS APPLICATION (applicationID integer primary key autoincrement, userID, foreName, surname, address, townland, town, postcode, tel, appEmail, description, floorArea, water, amount, disability, plans, signature, date, app-status, inspectionTime, inspection-status)');
+function initDb(tx) {
+  tx.executeSql('CREATE TABLE IF NOT EXISTS USER (id integer primary key autoincrement, firstName varchar(255), lastName varchar(255), userName varchar(255), email varchar(255), password varchar(25), gender varchar(255), dob, job varchar(255))');
+
   console.log("user table created");
+    // tx.executeSql('CREATE TABLE IF NOT EXISTS APPLICATION (applicationID integer primary key autoincrement, userID, foreName varchar(255), surname varchar(255), address varchar(255), townland varchar(55), town varchar(55), postcode varchar(8), tel varchar(255), appEmail varchar(255), description varchar(255), floorArea varchar(255), water varchar(255), amount varchar(255), disability varchar(255), plans, signature varchar(255), date, app-status varchar(255), inspectionTime, inspection-status varchar(255))');
+    console.log('app table');
 
 }
+function initDb2(tx) {
+  // tx.executeSql('CREATE TABLE IF NOT EXISTS USER (id integer primary key autoincrement, firstName varchar(255), lastName varchar(255), userName varchar(255), email varchar(255), password varchar(25), gender varchar(255), dob, job varchar(255))');
+
+    tx.executeSql('CREATE TABLE IF NOT EXISTS APPLICATION (applicationID integer primary key autoincrement, userID, foreName varchar(255), surname varchar(255), address varchar(255), townland varchar(55), town varchar(55), postcode varchar(8), tel varchar(255), appEmail varchar(255), description varchar(255), floorArea varchar(255), water varchar(255), amount varchar(255), disability varchar(255), plans, signature varchar(255), date, app-status varchar(255), inspectionTime, inspection-status varchar(255))');
+    console.log('app table');
+
+}
+
 
 //create account form
 function createAccount() {
