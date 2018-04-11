@@ -55,6 +55,10 @@ var app = new Framework7({
       path: '/newApp/',
       url: './pages/newApp.html',
     },
+    {
+      path: '/myApplications/',
+      url: './pages/myApplications.html',
+    },
      {
       path: '/home/',
       url: './pages/home.html',
@@ -79,6 +83,17 @@ var mainView = app.views.create('.view-left', {
 var mainView = app.views.create('.view-main', {
   url: '/'
 });
+
+function runExample() {
+  console.log("Run");
+  var routeToNavigateTo = '/myApplications/';
+  app.router.navigate(routeToNavigateTo);
+      // createDbAndTables();
+      // getAllTablesFromDB(getResultSetFromTable);
+    }
+
+
+
 
 
 $$(document).on('page:init', function(e) {
@@ -111,7 +126,7 @@ function initAppTable(tx) {
       water text,
       amount text,
       disability text,
-      plans text,
+      plans blob,
       signature text,
       date text,
       appStatus text,
@@ -124,21 +139,25 @@ function initAppTable(tx) {
 function initUserTable(tx) {
   tx.executeSql(`CREATE TABLE IF NOT EXISTS USER (
     id integer primary key autoincrement,
-    firstName varchar(255),
-    lastName varchar(255),
-    userName varchar(255),
-    email varchar(255),
-    password varchar(25),
-    gender varchar(255),
-    dob,
-    job varchar(255)
+    firstName text,
+    lastName text,
+    userName text,
+    email text,
+    password text,
+    gender text,
+    dob text,
+    job text
   )`);
+
 }
+
+
 
 function initTables(tx) {
 	initAppTable(tx);
 	initUserTable(tx);
 }
+
 //create account form
 function createAccount() {
   // This gets called whenever user submits the create account form
@@ -197,22 +216,3 @@ function validateForm(userForm) {
 
   return errors;
 }
-
-// creating Application table
-
-
-// create form
-
-
-
-
-$$(document).on('pageInit', function(e) {
-    // Get page data from event data
-    $.getScript("js/register.js");
-    $.getScript("js/login.js");
-
-  })
-  // $$(document).on('pageInit', '.page[data-page="form"]', function (e) {
-  //     // Following code will be executed for page with data-page attribute equal to "about"
-  //     app.alert('Here comes About page');
-  // })

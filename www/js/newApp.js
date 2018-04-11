@@ -42,7 +42,7 @@ var applicationForm = {
     console.log(applicationForm);
     console.log(applicationForm.foreName + 'dzgdf');
 
-    if (foreName == '' || surname == '' || address == '' || townland == '' || town == '' || postcode == '' || tel == '') {
+    if (foreName == '' || surname == '' || address == '' || townland == '' || town == '' || postcode == '' || tel == '' || appEmail == '' || description == '' || floorArea == '' || amount == '' || signature == '') {
       app.dialog.alert("Please Fill In All Fields!");
       console.log(applicationForm.foreName);
     } else {
@@ -62,7 +62,7 @@ var applicationForm = {
 
   function insertApplication(db, applicationForm) {
 console.log('insertApplication');
-    var query = 'INSERT INTO APPLICATION ( foreName, surname, address, townland, town, postcode, tel) VALUES ("' + applicationForm.foreName + '", "' + applicationForm.surname + '", "' + applicationForm.address + '", "' + applicationForm.townland + '", "' + applicationForm.town + '", "' + applicationForm.postcode + '", "' + applicationForm.tel + '")';
+    var query = 'INSERT INTO APPLICATION ( userID, foreName, surname, address, townland, town, postcode, tel, appEmail, description, floorArea, water, amount, disability, signature, date) VALUES ("' + applicationForm.userID + '", "' + applicationForm.foreName + '", "' + applicationForm.surname + '", "' + applicationForm.address + '", "' + applicationForm.townland + '", "' + applicationForm.town + '", "' + applicationForm.postcode + '", "' + applicationForm.tel + '", "' + applicationForm.appEmail + '", "' + applicationForm.description + '", "' + applicationForm.floorArea + '", "' + applicationForm.water + '", "' + applicationForm.amount + '", "' + applicationForm.disability + '", "' + applicationForm.signature + '", "' + applicationForm.date + '")';
     db.executeSql(query);
   }
 
@@ -78,7 +78,10 @@ console.log(error);
 
   function insertApplicationSuccess(applicationForm) {
     console.log('sucess');
-    app.dialog.alert("User Registered");
+    app.dialog.alert("Application Form Submitted");
+    var routeToNavigateTo = '/home/';
+
+    app.router.navigate(routeToNavigateTo);
 
     // var routeToNavigateTo = '/login/';
 
@@ -92,4 +95,23 @@ console.log(error);
     // alert('User Succesfully Registered');
     // window.location.href="/about/";
   }
+  
+
+  function queryDB(tx) {
+    tx.executeSql('SELECT * FROM APPLICATION', [], querySuccess);
+
+}
+
+// Query the success callback
+//
+function querySuccess(tx, results) {
+    var len = results.rows.length;
+    console.log("DEMO table: " + len + " rows found.");
+    for (var i=0; i<len; i++){
+        console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " +      results.rows.item(i).data);
+//the data from here to the html page.
+    }
+}
+
+
 });
