@@ -87,29 +87,58 @@ $$(document).on('page:init', function(e) {
   console.log("Device is ready!");
 // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
-  db.transaction(initDb, initDb2);
+  db.transaction(initTables);
+
   console.log("Database opened");
 
 });
 
 // create user table
-function initDb(tx) {
-  tx.executeSql('CREATE TABLE IF NOT EXISTS USER (id integer primary key autoincrement, firstName varchar(255), lastName varchar(255), userName varchar(255), email varchar(255), password varchar(25), gender varchar(255), dob, job varchar(255))');
-
-  console.log("user table created");
-    // tx.executeSql('CREATE TABLE IF NOT EXISTS APPLICATION (applicationID integer primary key autoincrement, userID, foreName varchar(255), surname varchar(255), address varchar(255), townland varchar(55), town varchar(55), postcode varchar(8), tel varchar(255), appEmail varchar(255), description varchar(255), floorArea varchar(255), water varchar(255), amount varchar(255), disability varchar(255), plans, signature varchar(255), date, app-status varchar(255), inspectionTime, inspection-status varchar(255))');
-    console.log('app table');
-
+function initAppTable(tx) {
+    tx.executeSql(`CREATE TABLE IF NOT EXISTS APPLICATION (
+      applicationID integer primary key,
+      userID text,
+      foreName text,
+      surname text,
+      address text,
+      townland text,
+      town text,
+      postcode text,
+      tel text,
+      appEmail text,
+      description text,
+      floorArea text,
+      water text,
+      amount text,
+      disability text,
+      plans text,
+      signature text,
+      date text,
+      appStatus text,
+      inspectionTime text,
+      inspectionStatus text
+    )`);
 }
-function initDb2(tx) {
-  // tx.executeSql('CREATE TABLE IF NOT EXISTS USER (id integer primary key autoincrement, firstName varchar(255), lastName varchar(255), userName varchar(255), email varchar(255), password varchar(25), gender varchar(255), dob, job varchar(255))');
 
-    tx.executeSql('CREATE TABLE IF NOT EXISTS APPLICATION (applicationID integer primary key autoincrement, userID, foreName varchar(255), surname varchar(255), address varchar(255), townland varchar(55), town varchar(55), postcode varchar(8), tel varchar(255), appEmail varchar(255), description varchar(255), floorArea varchar(255), water varchar(255), amount varchar(255), disability varchar(255), plans, signature varchar(255), date, app-status varchar(255), inspectionTime, inspection-status varchar(255))');
-    console.log('app table');
 
+function initUserTable(tx) {
+  tx.executeSql(`CREATE TABLE IF NOT EXISTS USER (
+    id integer primary key autoincrement,
+    firstName varchar(255),
+    lastName varchar(255),
+    userName varchar(255),
+    email varchar(255),
+    password varchar(25),
+    gender varchar(255),
+    dob,
+    job varchar(255)
+  )`);
 }
 
-
+function initTables(tx) {
+	initAppTable(tx);
+	initUserTable(tx);
+}
 //create account form
 function createAccount() {
   // This gets called whenever user submits the create account form

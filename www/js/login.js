@@ -30,7 +30,7 @@ console.log('test1');
     console.log(results.rows);
 
 
-    if (results.rows.item(0) === 0) {
+    if (results.rows.length === 0) {
       app.dialog.alert('Invalid credentials');
     } else {
       console.log('success');
