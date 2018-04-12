@@ -13,7 +13,7 @@ function determineView() {
     $$('.con').hide();
   }
 }
-
+var test = false;
 // Framework7 App main instance
 var app = new Framework7({
   root: '#app', // App root element
@@ -27,6 +27,7 @@ var app = new Framework7({
         firstName: 'John',
         lastName: 'Doe',
       },
+
     };
   },
   // App root methods
@@ -113,7 +114,7 @@ $$(document).on('page:init', function(e) {
   db.transaction(initTables);
 
   console.log("Database opened");
-
+  console.log(test);
 });
 
 // create user table
@@ -166,19 +167,25 @@ function initTables(tx) {
 	initAppTable(tx);
 	initUserTable(tx);
   queryDB(tx);
-  querySelectDB(tx);
+  if (test == true) {
+    querySelectDB(tx);
+    console.log('heyyyyyyy');
+  }
+
+
 }
 
 function querySelectDB(tx) {
+
   var currentID = JSON.parse(window.sessionStorage.user).id;
-  console.log(currentID);
+
 
   tx.executeSql("SELECT * FROM APPLICATION WHERE userID = '" + currentID +"'", [], querySelectSuccess);
 
 
 }
 // display all appliations for one user
-function querySelectSuccess(tx, results)
+function querySelectSuccess(db, results)
   {
 
              var len = results.rows.length, i;
@@ -203,7 +210,7 @@ function querySelectSuccess(tx, results)
 
 
                  onclick = (function(i) {return function() {
-                   console.log(len);
+
 };})(i);
         }
              }
@@ -226,7 +233,7 @@ function querySuccess(tx, results)
                  str += "<tr>";
 
                  str += "<td class='label-cell'>" + "<button class='button'>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
-                  console.log(this.applicationID);
+
                  str += "<td class='text-success'>" + results.rows.item(i).foreName + "</td>";
 
                  str += "<td class='text-success'>" + results.rows.item(i).appStatus + "</td>";
@@ -237,7 +244,7 @@ function querySuccess(tx, results)
                     }
                  str = '';
                  onclick = (function(i) {return function() {
-    console.log(results.rows.item(i).applicationID);
+
 };})(i);
         }
              }

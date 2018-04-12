@@ -34,8 +34,8 @@ console.log('test1');
       app.dialog.alert('Invalid credentials');
     } else {
       console.log('success');
-
-
+      test = true;
+      console.log('new test' + test);
       window.sessionStorage.user = JSON.stringify(results.rows.item(0));
 
        // window.location.href = 'home.html';
