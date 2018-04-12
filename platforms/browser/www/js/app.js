@@ -157,15 +157,20 @@ function initUserTable(tx) {
 function initTables(tx) {
 	initAppTable(tx);
 	initUserTable(tx);
-  queryDB(tx);
+  // queryDB(tx);
+  querySelectDB(tx);
 }
 
-function queryDB(tx) {
- tx.executeSql("SELECT * FROM APPLICATION", [], querySuccess);
- console.log('select all');
-}
+function querySelectDB(tx) {
+  var currentID = JSON.parse(window.sessionStorage.user).id;
+  console.log(currentID);
 
-function querySuccess(tx, results)
+  tx.executeSql("SELECT * FROM APPLICATION WHERE userID = '" + currentID +"'", [], querySelectSuccess);
+
+
+}
+// display all appliations for one user
+function querySelectSuccess(tx, results)
   {
 
              var len = results.rows.length, i;
@@ -176,11 +181,11 @@ function querySuccess(tx, results)
 
                  str += "<tr>";
 
-                 str += "<td class='label-cell'>" + "<button class='button'>" + results.rows.item(i).applicationID + "</button>" + "</td>";
+                 str += "<td class='label-cell'>" + "<button class='button'>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
                   console.log(this.applicationID);
                  str += "<td class='text-success'>" + results.rows.item(i).foreName + "</td>";
 
-                 str += "<td class='text-success'>" + results.rows.item(i).surname + "</td>";
+                 str += "<td class='text-success'>" + results.rows.item(i).appStatus + "</td>";
 
                  str += "</tr>";
                   if(document.getElementById("tblGrid") != null){
@@ -192,6 +197,40 @@ function querySuccess(tx, results)
 };})(i);
         }
              }
+//select * appliations statement
+// function queryDB(tx) {
+//  tx.executeSql("SELECT * FROM APPLICATION", [], querySuccess);
+//  console.log('select all');
+// }
+
+// display all appliations - used for building control
+// function querySuccess(tx, results)
+//   {
+//
+//              var len = results.rows.length, i;
+//
+//              var str = '';
+//
+//              for (i = 0; i < len; i++) {
+//
+//                  str += "<tr>";
+//
+//                  str += "<td class='label-cell'>" + "<button class='button'>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
+//                   console.log(this.applicationID);
+//                  str += "<td class='text-success'>" + results.rows.item(i).foreName + "</td>";
+//
+//                  str += "<td class='text-success'>" + results.rows.item(i).appStatus + "</td>";
+//
+//                  str += "</tr>";
+//                   if(document.getElementById("tblGrid") != null){
+//                         document.getElementById("tblGrid").innerHTML += str;
+//                     }
+//                  str = '';
+//                  onclick = (function(i) {return function() {
+//     console.log(results.rows.item(i).applicationID);
+// };})(i);
+//         }
+//              }
 
 
 function loadButtonApp(len){

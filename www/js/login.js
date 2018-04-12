@@ -21,7 +21,7 @@ console.log('test1');
   });
   function checkCredentials(db, loginForm) {
     console.log('didnt get');
-    var query = 'SELECT * FROM USER WHERE email = "' + loginForm.userName + '" AND password = "' + loginForm.password + '"';
+    var query = 'SELECT * FROM USER WHERE userName = "' + loginForm.userName + '" AND password = "' + loginForm.password + '"';
     db.executeSql(query, [], doesUserExist);
     console.log('got user');
   }
