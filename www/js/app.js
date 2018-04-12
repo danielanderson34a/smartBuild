@@ -59,6 +59,14 @@ var app = new Framework7({
       path: '/myApplications/',
       url: './pages/myApplications.html',
     },
+    {
+      path: '/bcApplications/',
+      url: './pages/bcApplications.html',
+    },
+    {
+      path: '/viewNotes/',
+      url: './pages/viewNotes.html',
+    },
      {
       path: '/home/',
       url: './pages/home.html',
@@ -157,7 +165,7 @@ function initUserTable(tx) {
 function initTables(tx) {
 	initAppTable(tx);
 	initUserTable(tx);
-  // queryDB(tx);
+  queryDB(tx);
   querySelectDB(tx);
 }
 
@@ -181,8 +189,8 @@ function querySelectSuccess(tx, results)
 
                  str += "<tr>";
 
-                 str += "<td class='label-cell'>" + "<button class='button'>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
-                  console.log(this.applicationID);
+                 str += "<td class='label-cell'>" + "<button class='button' value=''>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
+
                  str += "<td class='text-success'>" + results.rows.item(i).foreName + "</td>";
 
                  str += "<td class='text-success'>" + results.rows.item(i).appStatus + "</td>";
@@ -192,45 +200,47 @@ function querySelectSuccess(tx, results)
                         document.getElementById("tblGrid").innerHTML += str;
                     }
                  str = '';
+
+
+                 onclick = (function(i) {return function() {
+                   console.log(len);
+};})(i);
+        }
+             }
+// select * appliations statement
+function queryDB(tx) {
+ tx.executeSql("SELECT * FROM APPLICATION", [], querySuccess);
+ console.log('select all');
+}
+
+// display all appliations - used for building control
+function querySuccess(tx, results)
+  {
+
+             var len = results.rows.length, i;
+
+             var str = '';
+
+             for (i = 0; i < len; i++) {
+
+                 str += "<tr>";
+
+                 str += "<td class='label-cell'>" + "<button class='button'>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
+                  console.log(this.applicationID);
+                 str += "<td class='text-success'>" + results.rows.item(i).foreName + "</td>";
+
+                 str += "<td class='text-success'>" + results.rows.item(i).appStatus + "</td>";
+
+                 str += "</tr>";
+                  if(document.getElementById("tblBc") != null){
+                        document.getElementById("tblBc").innerHTML += str;
+                    }
+                 str = '';
                  onclick = (function(i) {return function() {
     console.log(results.rows.item(i).applicationID);
 };})(i);
         }
              }
-//select * appliations statement
-// function queryDB(tx) {
-//  tx.executeSql("SELECT * FROM APPLICATION", [], querySuccess);
-//  console.log('select all');
-// }
-
-// display all appliations - used for building control
-// function querySuccess(tx, results)
-//   {
-//
-//              var len = results.rows.length, i;
-//
-//              var str = '';
-//
-//              for (i = 0; i < len; i++) {
-//
-//                  str += "<tr>";
-//
-//                  str += "<td class='label-cell'>" + "<button class='button'>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
-//                   console.log(this.applicationID);
-//                  str += "<td class='text-success'>" + results.rows.item(i).foreName + "</td>";
-//
-//                  str += "<td class='text-success'>" + results.rows.item(i).appStatus + "</td>";
-//
-//                  str += "</tr>";
-//                   if(document.getElementById("tblGrid") != null){
-//                         document.getElementById("tblGrid").innerHTML += str;
-//                     }
-//                  str = '';
-//                  onclick = (function(i) {return function() {
-//     console.log(results.rows.item(i).applicationID);
-// };})(i);
-//         }
-//              }
 
 
 function loadButtonApp(len){
