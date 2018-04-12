@@ -63,7 +63,11 @@ var applicationForm = {
   function insertApplication(db, applicationForm) {
 console.log('insertApplication');
     var query = 'INSERT INTO APPLICATION ( userID, foreName, surname, address, townland, town, postcode, tel, appEmail, description, floorArea, water, amount, disability, signature, date) VALUES ("' + applicationForm.userID + '", "' + applicationForm.foreName + '", "' + applicationForm.surname + '", "' + applicationForm.address + '", "' + applicationForm.townland + '", "' + applicationForm.town + '", "' + applicationForm.postcode + '", "' + applicationForm.tel + '", "' + applicationForm.appEmail + '", "' + applicationForm.description + '", "' + applicationForm.floorArea + '", "' + applicationForm.water + '", "' + applicationForm.amount + '", "' + applicationForm.disability + '", "' + applicationForm.signature + '", "' + applicationForm.date + '")';
+    var results = ('SELECT * FROM APPLICATION');
     db.executeSql(query);
+    db.executeSql(results);
+    console.log(results + 'checked');
+
   }
 
   // function getuserid(tx, results) {
@@ -95,12 +99,11 @@ console.log(error);
     // alert('User Succesfully Registered');
     // window.location.href="/about/";
   }
-  
 
-  function queryDB(tx) {
-    tx.executeSql('SELECT * FROM APPLICATION', [], querySuccess);
-
-}
+//   function queryDB(tx) {
+//     var results = ('SELECT * FROM APPLICATION');
+//     console.log(results);
+// }
 
 // Query the success callback
 //
