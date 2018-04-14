@@ -62,9 +62,44 @@ console.log(error);
 
 
   }
-
-
-
-
-
 });
+
+function querySelectNotes(tx) {
+
+  var currentID = JSON.parse(window.sessionStorage.user).id;
+
+
+  tx.executeSql("SELECT * FROM NOTES WHERE userID = '" + currentID + "'", [], querySelectNotesSuccess);
+
+
+}
+// display all appliations for one user
+function querySelectNotesSuccess(db, results) {
+
+  var len = results.rows.length,
+    i;
+
+  var str = '';
+
+  for (i = 0; i < len; i++) {
+
+    str += "<ul>";
+
+    str += "<li class='swipeout'>" + "<div class='item-content swipeout-content'>Title:" + "&nbsp;" + "&nbsp;"  + results.rows.item(i).noteTitle  + "</br>Description:" + "&nbsp;" + "&nbsp;" + results.rows.item(i).noteDescription + "</br>Date:"+ "&nbsp;" + "&nbsp;"  + results.rows.item(i).noteDate + "</div>" + "<div class='swipeout-actions-right'>"
+        + "<a href='#' data-confirm='Are you sure you want to delete this item?' class='swipeout-delete'>Delete</a>" +
+      "</div>" + "</li>" + "<hr>";
+
+    str += "</ul>";
+    if (document.getElementById("tblNotes") != null) {
+      document.getElementById("tblNotes").innerHTML += str;
+    }
+    str = '';
+
+
+    onclick = (function(i) {
+      return function() {
+
+      };
+    })(i);
+  }
+}

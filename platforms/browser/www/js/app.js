@@ -177,8 +177,6 @@ function initNoteTable(tx) {
 }
 
 
-
-
 function initTables(tx) {
 	initAppTable(tx);
 	initUserTable(tx);
@@ -186,6 +184,7 @@ function initTables(tx) {
   queryDB(tx);
   if (test == true) {
     querySelectDB(tx);
+    querySelectNotes(tx);
     console.log('heyyyyyyy');
   }
 
