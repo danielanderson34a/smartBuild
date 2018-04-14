@@ -68,6 +68,10 @@ var app = new Framework7({
       path: '/viewNotes/',
       url: './pages/viewNotes.html',
     },
+    {
+      path: '/createNotes/',
+      url: './pages/createNotes.html',
+    },
      {
       path: '/home/',
       url: './pages/home.html',
@@ -160,12 +164,25 @@ function initUserTable(tx) {
 
 }
 
+function initNoteTable(tx) {
+  tx.executeSql(`CREATE TABLE IF NOT EXISTS NOTES (
+    noteID integer primary key,
+    userID text,
+    noteTitle text,
+    noteDescription text,
+    noteDate text
+
+  )`);
+
+}
+
 
 
 
 function initTables(tx) {
 	initAppTable(tx);
 	initUserTable(tx);
+  initNoteTable(tx);
   queryDB(tx);
   if (test == true) {
     querySelectDB(tx);
@@ -175,79 +192,8 @@ function initTables(tx) {
 
 }
 
-function querySelectDB(tx) {
-
-  var currentID = JSON.parse(window.sessionStorage.user).id;
 
 
-  tx.executeSql("SELECT * FROM APPLICATION WHERE userID = '" + currentID +"'", [], querySelectSuccess);
-
-
-}
-// display all appliations for one user
-function querySelectSuccess(db, results)
-  {
-
-             var len = results.rows.length, i;
-
-             var str = '';
-
-             for (i = 0; i < len; i++) {
-
-                 str += "<tr>";
-
-                 str += "<td class='label-cell'>" + "<button class='button' value=''>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
-
-                 str += "<td class='text-success'>" + results.rows.item(i).foreName + "</td>";
-
-                 str += "<td class='text-success'>" + results.rows.item(i).appStatus + "</td>";
-
-                 str += "</tr>";
-                  if(document.getElementById("tblGrid") != null){
-                        document.getElementById("tblGrid").innerHTML += str;
-                    }
-                 str = '';
-
-
-                 onclick = (function(i) {return function() {
-
-};})(i);
-        }
-             }
-// select * appliations statement
-function queryDB(tx) {
- tx.executeSql("SELECT * FROM APPLICATION", [], querySuccess);
- console.log('select all');
-}
-
-// display all appliations - used for building control
-function querySuccess(tx, results)
-  {
-
-             var len = results.rows.length, i;
-
-             var str = '';
-
-             for (i = 0; i < len; i++) {
-
-                 str += "<tr>";
-
-                 str += "<td class='label-cell'>" + "<button class='button'>FP-" + results.rows.item(i).applicationID + "</button>" + "</td>";
-
-                 str += "<td class='text-success'>" + results.rows.item(i).foreName + "</td>";
-
-                 str += "<td class='text-success'>" + results.rows.item(i).appStatus + "</td>";
-
-                 str += "</tr>";
-                  if(document.getElementById("tblBc") != null){
-                        document.getElementById("tblBc").innerHTML += str;
-                    }
-                 str = '';
-                 onclick = (function(i) {return function() {
-
-};})(i);
-        }
-             }
 
 
 function loadButtonApp(len){
