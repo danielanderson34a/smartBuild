@@ -26,8 +26,7 @@ var app = new Framework7({
       user: {
         firstName: 'John',
         lastName: 'Doe',
-      },
-
+      }
     };
   },
   // App root methods
@@ -59,6 +58,10 @@ var app = new Framework7({
     {
       path: '/myApplications/',
       url: './pages/myApplications.html',
+    },
+    {
+      path: '/applications/:applicationID',
+      url: './pages/application.html',
     },
     {
       path: '/bcApplications/',

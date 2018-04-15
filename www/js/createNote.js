@@ -86,7 +86,7 @@ function querySelectNotesSuccess(db, results) {
     str += "<ul>";
 
     str += "<li class='swipeout'>" + "<div class='item-content swipeout-content'>Title:" + "&nbsp;" + "&nbsp;"  + results.rows.item(i).noteTitle  + "</br>Description:" + "&nbsp;" + "&nbsp;" + results.rows.item(i).noteDescription + "</br>Date:"+ "&nbsp;" + "&nbsp;"  + results.rows.item(i).noteDate + "</div>" + "<div class='swipeout-actions-right'>"
-        + "<a href='#' data-confirm='Are you sure you want to delete this item?' class='swipeout-delete'>Delete</a>" +
+        + "<a onclick='deleteNote(" + results.rows.item(i).noteID + ")' href='#' data-confirm='Are you sure you want to delete this item?' class='swipeout-delete'>Delete</a>" +
       "</div>" + "</li>" + "<hr>";
 
     str += "</ul>";
@@ -102,4 +102,9 @@ function querySelectNotesSuccess(db, results) {
       };
     })(i);
   }
+}
+
+function deleteNote(noteId) {
+  console.log('DELETE NOTE: ' + noteId);
+  // delete from notes where noteID = noteid;
 }
