@@ -69,11 +69,11 @@ function querySelectNotes(tx) {
   var currentID = JSON.parse(window.sessionStorage.user).id;
 
 
-  tx.executeSql("SELECT * FROM NOTES WHERE userID = '" + currentID + "'", [], querySelectNotesSuccess);
+  tx.executeSql("SELECT * FROM NOTES WHERE userID = '" + currentID + "'", [], querySelectNotesSuccess, deleteNote);
 
 
 }
-// display all appliations for one user
+// display all notes for one user
 function querySelectNotesSuccess(db, results) {
 
   var len = results.rows.length,
@@ -86,7 +86,7 @@ function querySelectNotesSuccess(db, results) {
     str += "<ul>";
 
     str += "<li class='swipeout'>" + "<div class='item-content swipeout-content'>Title:" + "&nbsp;" + "&nbsp;"  + results.rows.item(i).noteTitle  + "</br>Description:" + "&nbsp;" + "&nbsp;" + results.rows.item(i).noteDescription + "</br>Date:"+ "&nbsp;" + "&nbsp;"  + results.rows.item(i).noteDate + "</div>" + "<div class='swipeout-actions-right'>"
-        + "<a onclick='deleteNote(" + results.rows.item(i).noteID + ")' href='#' data-confirm='Are you sure you want to delete this item?' class='swipeout-delete'>Delete</a>" +
+        + "<a onclick='deleteNote(" + results.rows.item(i).noteID + ")' href='#' class='swipeout-delete'>Delete</a>" +
       "</div>" + "</li>" + "<hr>";
 
     str += "</ul>";
@@ -95,16 +95,15 @@ function querySelectNotesSuccess(db, results) {
     }
     str = '';
 
-
-    onclick = (function(i) {
-      return function() {
-
-      };
-    })(i);
   }
 }
 
 function deleteNote(noteId) {
   console.log('DELETE NOTE: ' + noteId);
+   // tx.executeSql('DELETE FROM NOTES WHERE noteID = "' + noteId + '"' , [], queryDeleteNotesSuccess);
   // delete from notes where noteID = noteid;
+}
+
+function queryDeleteNotesSuccess(){
+
 }

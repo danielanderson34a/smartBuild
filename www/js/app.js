@@ -14,6 +14,7 @@ function determineView() {
   }
 }
 var test = false;
+var fetch = false;
 // Framework7 App main instance
 var app = new Framework7({
   root: '#app', // App root element
@@ -111,7 +112,6 @@ function runExample() {
 
 
 
-
 $$(document).on('page:init', function(e) {
 
 
@@ -119,6 +119,7 @@ $$(document).on('page:init', function(e) {
 // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
   db.transaction(initTables);
+  // db.transaction(initApplication);
 
   console.log("Database opened");
   console.log(test);
@@ -180,6 +181,7 @@ function initNoteTable(tx) {
 }
 
 
+
 function initTables(tx) {
 	initAppTable(tx);
 	initUserTable(tx);
@@ -193,7 +195,9 @@ function initTables(tx) {
 
 
 }
-
+// function initApplication(tx){
+//   application(tx);
+// }
 
 
 

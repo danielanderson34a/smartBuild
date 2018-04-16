@@ -3,13 +3,13 @@ function querySelectDB(tx) {
   var currentID = JSON.parse(window.sessionStorage.user).id;
 
 
-  tx.executeSql("SELECT * FROM APPLICATION WHERE userID = '" + currentID + "'", [], querySelectSuccess);
+  tx.executeSql("SELECT * FROM APPLICATION WHERE userID = '" + currentID + "'", [], querySelectSuccess, go);
 
 
 }
 // display all appliations for one user
 function querySelectSuccess(db, results) {
-
+console.log('hvuvycttyctrtycrt');
   var len = results.rows.length,
     i;
 
@@ -22,7 +22,7 @@ function querySelectSuccess(db, results) {
 
     str += "<tr>";
 
-    str += `<td class='label-cell'><a class='button' href='/applications/${appId}'>FP-${appId}</a></td>`;
+    str += `<td class='label-cell'><a class='button' onclick='go()' id='openApp' href='/applications/${appId}'>FP-${appId}</a></td>`;
 
     str += "<td class='text-success'>" + currentApp.foreName + "</td>";
 
@@ -35,10 +35,11 @@ function querySelectSuccess(db, results) {
     str = '';
 
 
-    onclick = (function(i) {
-      return function() {
 
-      };
-    })(i);
   }
+}
+function go() {
+  console.log('go function');
+ fetch = true;
+ console.log(fetch);
 }
