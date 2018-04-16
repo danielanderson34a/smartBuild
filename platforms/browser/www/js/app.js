@@ -69,6 +69,10 @@ var app = new Framework7({
       url: './pages/bcApplications.html',
     },
     {
+      path: '/viewPdf/',
+      url: './pages/viewPdf.html',
+    },
+    {
       path: '/viewNotes/',
       url: './pages/viewNotes.html',
     },
@@ -123,6 +127,8 @@ $$(document).on('page:init', function(e) {
 
   console.log("Database opened");
   console.log(test);
+
+
 });
 
 // create user table
