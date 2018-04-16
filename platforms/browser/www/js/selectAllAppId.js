@@ -22,7 +22,7 @@ console.log('hvuvycttyctrtycrt');
 
     str += "<tr>";
 
-    str += `<td class='label-cell'><a class='button' onclick='go()' id='openApp' href='/applications/${appId}'>FP-${appId}</a></td>`;
+    str += `<td clear="left" class='label-cell'><a class='button' onclick='go()' id='openApp' href='/applications/${appId}'>FP-${appId}</a></td>`;
 
     str += "<td class='text-success'>" + currentApp.foreName + "</td>";
 

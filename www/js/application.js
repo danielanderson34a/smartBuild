@@ -1,4 +1,15 @@
 $$(document).on('page:init', function(e) {
+  if (test == true) {
+    var user = JSON.parse(window.sessionStorage.user);
+      if (user.job === 'Construction') {
+        console.log('con worker');
+        $$('.bc1').hide();
+        $$('.con1').show();
+      } else {
+        $$('.bc1').show();
+        $$('.con1').hide();
+      }
+  }
 
 
   console.log("Device is ready!");
