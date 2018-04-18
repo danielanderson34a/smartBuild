@@ -1,8 +1,9 @@
 // Dom7
 var $$ = Dom7;
-
+var booked = false;
 function determineView() {
   var user = JSON.parse(window.sessionStorage.user);
+
 
   if (user.job === 'Construction') {
     console.log('con worker');
@@ -13,8 +14,19 @@ function determineView() {
     $$('.con').hide();
   }
 }
+function determineViews() {
+if (booked == true) {
+  $$('.showTable').show();
+}
+else {
+  $$('.showTable').hide();
+}
+}
+
 var test = false;
 var fetch = false;
+
+console.log(booked + 'booked');
 // Framework7 App main instance
 var app = new Framework7({
   root: '#app', // App root element
@@ -67,6 +79,10 @@ var app = new Framework7({
     {
       path: '/bcApplications/',
       url: './pages/bcApplications.html',
+    },
+    {
+      path: '/viewInspec/',
+      url: './pages/viewInspec.html',
     },
     {
       path: '/viewPdf/',
@@ -197,6 +213,7 @@ function initTables(tx) {
   if (test == true) {
     querySelectDB(tx);
     querySelectNotes(tx);
+    querySelectInspec(tx);
     console.log('heyyyyyyy');
   }
 
