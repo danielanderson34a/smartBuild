@@ -98,9 +98,10 @@ function querySelectNotesSuccess(db, results) {
   }
 }
 
-function deleteNote(noteId) {
-  console.log('DELETE NOTE: ' + noteId);
-   // tx.executeSql('DELETE FROM NOTES WHERE noteID = "' + noteId + '"' , [], queryDeleteNotesSuccess);
+function deleteNote(noteID) {
+  console.log('DELETE NOTE: ' + noteID);
+   // tx.executeSql('DELETE FROM NOTES WHERE noteID = "' + noteID + '"' , [], queryDeleteNotesSuccess);
+
   // delete from notes where noteID = noteid;
 }
 

@@ -193,6 +193,7 @@ function initTables(tx) {
 	initUserTable(tx);
   initNoteTable(tx);
   queryDB(tx);
+  deleteNote(tx);
   if (test == true) {
     querySelectDB(tx);
     querySelectNotes(tx);

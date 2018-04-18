@@ -34,6 +34,7 @@ function querySuccess(tx, results) {
     str = '';
 
   }
+
 }
 function go() {
   console.log('go function');

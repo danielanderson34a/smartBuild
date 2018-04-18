@@ -23,6 +23,7 @@ $$(document).on('page:init', function(e) {
 
 function application(tx) {
   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
+  console.log(appId + 'dana dna');
   console.log('APPLICATION: ' + appId);
   tx.executeSql("SELECT * FROM APPLICATION WHERE applicationID = '" + appId + "'", [], queryApplicationSuccess);
   console.log('selected');
@@ -55,7 +56,18 @@ function queryApplicationSuccess(db, results) {
     fetch = false;
   }
 
+}
+function updateStatus() {
+  var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
+db.transaction(queryUpdateSuccess);
+console.log('in update success');
+}
+function queryUpdateSuccess(tx)
+{
+  var appId = parseInt(mainView.router.currentRoute.params.applicationID);
+  tx.executeSql("UPDATE APPLICATION SET appStatus='Approved' WHERE applicationID = '" + appId + "'");
+console.log('in success');
 }
 
 function initApplication(tx) {

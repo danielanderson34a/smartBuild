@@ -34,6 +34,7 @@ var applicationForm = {
   water: water,
   amount: amount,
   disability: disability,
+
   // plans: plans,
   signature: signature,
   date: date
@@ -62,7 +63,7 @@ var applicationForm = {
 
   function insertApplication(db, applicationForm) {
 console.log('insertApplication');
-    var query = 'INSERT INTO APPLICATION ( userID, foreName, surname, address, townland, town, postcode, tel, appEmail, description, floorArea, water, amount, disability, signature, date, appStatus) VALUES ("' + applicationForm.userID + '", "' + applicationForm.foreName + '", "' + applicationForm.surname + '", "' + applicationForm.address + '", "' + applicationForm.townland + '", "' + applicationForm.town + '", "' + applicationForm.postcode + '", "' + applicationForm.tel + '", "' + applicationForm.appEmail + '", "' + applicationForm.description + '", "' + applicationForm.floorArea + '", "' + applicationForm.water + '", "' + applicationForm.amount + '", "' + applicationForm.disability + '", "' + applicationForm.signature + '", "' + applicationForm.date + '", "' + "Pending.." + '")';
+    var query = 'INSERT INTO APPLICATION ( userID, foreName, surname, address, townland, town, postcode, tel, appEmail, description, floorArea, water, amount, disability, signature, date, appStatus) VALUES ("' + applicationForm.userID + '", "' + applicationForm.foreName + '", "' + applicationForm.surname + '", "' + applicationForm.address + '", "' + applicationForm.townland + '", "' + applicationForm.town + '", "' + applicationForm.postcode + '", "' + applicationForm.tel + '", "' + applicationForm.appEmail + '", "' + applicationForm.description + '", "' + applicationForm.floorArea + '", "' + applicationForm.water + '", "' + applicationForm.amount + '", "' + applicationForm.disability + '", "' + applicationForm.signature + '", "' + applicationForm.date + '", "' + "Pending" + '")';
     var results = ('SELECT * FROM APPLICATION');
     db.executeSql(query);
     db.executeSql(results);

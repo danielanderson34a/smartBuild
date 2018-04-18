@@ -27,6 +27,11 @@ console.log('hvuvycttyctrtycrt');
     str += "<td class='text-success'>" + currentApp.foreName + "</td>";
 
     str += "<td class='text-success'>" + currentApp.appStatus + "</td>";
+str += "</tr>";
+str += "<tr >";
+    if (currentApp.appStatus === 'Approved') {
+      str += "<th><a  class='button color-green link popup-open' data-popup='.popup-about' >Book Inspection </a></th>";
+    }
 
     str += "</tr>";
     if (document.getElementById("tblGrid") != null) {
