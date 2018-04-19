@@ -100,9 +100,20 @@ function querySelectNotesSuccess(db, results) {
 
 function deleteNote(noteID) {
   console.log('DELETE NOTE: ' + noteID);
+
+  var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
+
+  db.transaction(function(tx) {
+    removeNote(tx, noteID);
+  });
    // tx.executeSql('DELETE FROM NOTES WHERE noteID = "' + noteID + '"' , [], queryDeleteNotesSuccess);
 
   // delete from notes where noteID = noteid;
+}
+
+function removeNote(tx, noteID) {
+  console.log('removing note ' + noteID);
+  tx.executeSql(`DELETE FROM NOTES WHERE noteID = ${noteID}`);
 }
 
 function queryDeleteNotesSuccess(){

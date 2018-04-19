@@ -36,7 +36,7 @@ var inspectionForm = {
     console.log(inspecDate);
     console.log(currentID);
     console.log(currentApp);
-    var query = "UPDATE APPLICATION SET inspectionTime = '" + inspecDate + "' WHERE applicationID = '" + currentID + "'";
+    var query = "UPDATE APPLICATION SET inspectionTime = '" + inspecDate + "' WHERE applicationID = '" + appID + "'";
     var results = ('SELECT * FROM APPLICATION');
     db.executeSql(query);
     db.executeSql(results);
