@@ -27,14 +27,15 @@ function querySuccess(tx, results) {
 
     str += "<td class='text-success'>" + currentApp.appStatus + "</td>";
 
+    str += "<td class='text-success'>" + currentApp.inspectionStatus + "</td>";
+
     str += "</tr>";
-    if (document.getElementById("tblBc") != null) {
-      document.getElementById("tblBc").innerHTML += str;
-    }
-    str = '';
+
 
   }
-
+  if (document.getElementById("tblBc") != null) {
+    document.getElementById("tblBc").innerHTML = str;
+  }
 }
 function go() {
   console.log('go function');

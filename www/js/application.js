@@ -67,7 +67,34 @@ function queryUpdateSuccess(tx)
 {
   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
   tx.executeSql("UPDATE APPLICATION SET appStatus='Approved' WHERE applicationID = '" + appId + "'");
-console.log('in success');
+  app.dialog.alert("Application Approved!");
+
+  var routeToNavigateTo = '/home/';
+
+  // if (userForm.job === 'buildingControl'){
+  //   routeToNavigateTo = '/bc-home/';
+  // }
+
+  app.router.navigate(routeToNavigateTo);
+}
+function updateReject(){
+  var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
+
+db.transaction(queryRejectSuccess);
+}
+function queryRejectSuccess(tx)
+{
+  var appId = parseInt(mainView.router.currentRoute.params.applicationID);
+  tx.executeSql("UPDATE APPLICATION SET appStatus='Rejected' WHERE applicationID = '" + appId + "'");
+  app.dialog.alert("Application Rejected!");
+
+  var routeToNavigateTo = '/home/';
+
+  // if (userForm.job === 'buildingControl'){
+  //   routeToNavigateTo = '/bc-home/';
+  // }
+
+  app.router.navigate(routeToNavigateTo);
 }
 
 function initApplication(tx) {

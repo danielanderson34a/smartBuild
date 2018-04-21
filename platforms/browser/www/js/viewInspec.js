@@ -26,15 +26,19 @@ function querInspecSuccess(db, results) {
     str += "<td class='text-success'>" + currentApp.foreName + "</td>";
 
     str += "<td class='text-success'>" + currentApp.inspectionTime + "</td>";
+
+    str += "<td class='text-success'>" + currentApp.inspectionStatus + "</td>";
+
 str += "</tr>";
 
-    if (document.getElementById("tblInspec") != null) {
-      document.getElementById("tblInspec").innerHTML += str;
-    }
-    str = '';
 
 
 
+
+
+  }
+  if (document.getElementById("tblInspec") != null) {
+    document.getElementById("tblInspec").innerHTML = str;
   }
 }
 function go() {

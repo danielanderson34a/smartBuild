@@ -1,3 +1,4 @@
+
 function querySelectDB(tx) {
 
   var currentID = JSON.parse(window.sessionStorage.user).id;
@@ -27,6 +28,9 @@ console.log('hvuvycttyctrtycrt');
     str += "<td class='text-success'>" + currentApp.foreName + "</td>";
 
     str += "<td class='text-success'>" + currentApp.appStatus + "</td>";
+
+    str += "<td class='text-success'>" + currentApp.inspectionStatus + "</td>";
+
 
     // str += "<tr >";
     if (currentApp.appStatus === 'Approved') {
@@ -100,4 +104,8 @@ function submitedInspection(tx, appId){
   console.log('submitting inspection booking ' + appId);
   var submit = "UPDATE APPLICATION SET inspectionTime = '" + inspecDate + "' WHERE applicationID = '" + appId + "'";
   tx.executeSql(submit);
+  app.dialog.alert("Booking submited for: " + inspecDate + "At: ");
+
+
+
 }
