@@ -31,13 +31,13 @@ console.log('hvuvycttyctrtycrt');
 
     str += "<td class='text-success'>" + currentApp.inspectionStatus + "</td>";
 
-
+str += "<tr>";
     // str += "<tr >";
     if (currentApp.appStatus === 'Approved') {
-      str += `<a onclick='bookInspection(${appId})' class='button color-green link'>Book Inspection </a>`;
+      str += `<td clear="left" class='label-cell'><a style='float:right;' onclick='bookInspection(${appId})' class='button color-green link'>Book Inspection </a></td>`;
     // str += "</tr>";
     }
-
+str += "</tr>";
     str += "</tr>";
   }
 
@@ -71,6 +71,25 @@ function bookInspection(appId) {
                 </div>
               </div>
             </li>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Select time</div>
+                  <div class="item-input-wrap">
+                    <select id="inspecDate">
+                      <option>09:00</option>
+                      <option>10:00</option>
+                      <option>11:00</option>
+                      <option>12:00</option>
+                      <option>13:00</option>
+                      <option>14:00</option>
+                      <option>15:00</option>
+                      <option>16:00</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </li>
 
             <a onclick="submitInspectionBooking(${appId})" href="#" class="col button button-big button-fill button-raised color-green">Book Inspection</a>
           </ul>
@@ -101,10 +120,16 @@ function submitInspectionBooking(appId) {
 
 function submitedInspection(tx, appId){
   var inspecDate = $$("#inspectionTime").val();
+  var inspecTime = $$("#inspecDate").val();
+  console.log(inspecTime);
   console.log('submitting inspection booking ' + appId);
   var submit = "UPDATE APPLICATION SET inspectionTime = '" + inspecDate + "' WHERE applicationID = '" + appId + "'";
+  var submit1 = "UPDATE APPLICATION SET inspecDate = '" + inspecTime + "' WHERE applicationID = '" + appId + "'";
+
   tx.executeSql(submit);
-  app.dialog.alert("Booking submited for: " + inspecDate + "At: ");
+  tx.executeSql(submit1);
+
+  app.dialog.alert("Booking submited for: " + inspecDate + " At: " + inspecTime);
 
 
 

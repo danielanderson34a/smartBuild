@@ -144,6 +144,28 @@ function queryUpdateInspec(tx)
   app.router.navigate(routeToNavigateTo);
 }
 
+function updateRejectInspec() {
+  var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
+
+db.transaction(queryRejectInspec);
+console.log('in update success');
+}
+function queryRejectInspec(tx)
+{
+  var appId = parseInt(mainView.router.currentRoute.params.applicationID);
+
+  tx.executeSql("UPDATE APPLICATION SET inspectionStatus='Rejected' WHERE applicationID = '" + appId + "'");
+  app.dialog.alert("Inspection Rejected!");
+ appStatus = true;
+  var routeToNavigateTo = '/home/';
+
+  // if (userForm.job === 'buildingControl'){
+  //   routeToNavigateTo = '/bc-home/';
+  // }
+
+  app.router.navigate(routeToNavigateTo);
+}
+
 function initApplication(tx) {
   application(tx);
 

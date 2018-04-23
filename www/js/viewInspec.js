@@ -25,7 +25,7 @@ function querInspecSuccess(db, results) {
 
     str += "<td class='text-success'>" + currentApp.address + "</td>";
 
-    str += "<td class='text-success'>" + currentApp.inspectionTime + "</td>";
+    str += "<td class='text-success'>" + currentApp.inspectionTime + " " + currentApp.inspecDate + "</td>";
 
     str += "<td class='text-success'>" + currentApp.inspectionStatus + "</td>";
 

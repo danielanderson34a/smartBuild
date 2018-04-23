@@ -174,6 +174,7 @@ function initAppTable(tx) {
       date text,
       appStatus text,
       inspectionTime text,
+      inspecDate text,
       inspectionStatus text
     )`);
 }
