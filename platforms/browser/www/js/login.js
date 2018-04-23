@@ -44,7 +44,10 @@ console.log('test1');
        // myApp.router.findElement('#home');
        app.router.navigate('/home/');
        // console.log(JSON.parse(window.sessionStorage.user).id + ' user obj');
-
+       if (appStatus == true) {
+         app.dialog.alert('Application Approved');
+         appStatus = false;
+       }
     }
   }
   function loginSuccess(db, results) {

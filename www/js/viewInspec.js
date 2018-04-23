@@ -21,13 +21,14 @@ function querInspecSuccess(db, results) {
 
     str += "<tr>";
 
-    str += `<td class='label-cell'><a class='button' onclick='go()' id='openApp' href='/applications/${appId}'>FP-${appId}</a></td>`;
+    str += `<td clear="left" class='label-cell'><a class='button' onclick='go()' id='openApp' href='/inspection/${appId}'>FP-${appId}</a></td>`
 
-    str += "<td class='text-success'>" + currentApp.foreName + "</td>";
+    str += "<td class='text-success'>" + currentApp.address + "</td>";
 
     str += "<td class='text-success'>" + currentApp.inspectionTime + "</td>";
 
     str += "<td class='text-success'>" + currentApp.inspectionStatus + "</td>";
+
 
 str += "</tr>";
 
@@ -41,6 +42,7 @@ str += "</tr>";
     document.getElementById("tblInspec").innerHTML = str;
   }
 }
+
 function go() {
   console.log('go function');
  fetch = true;

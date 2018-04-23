@@ -12,6 +12,7 @@ $$(document).on('page:init', function(e) {
   }
 
 
+
   console.log("Device is ready!");
 // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
@@ -57,6 +58,9 @@ function queryApplicationSuccess(db, results) {
   }
 
 }
+if (application.appStatus) {
+
+}
 function updateStatus() {
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
@@ -68,7 +72,7 @@ function queryUpdateSuccess(tx)
   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
   tx.executeSql("UPDATE APPLICATION SET appStatus='Approved' WHERE applicationID = '" + appId + "'");
   app.dialog.alert("Application Approved!");
-
+ appStatus = true;
   var routeToNavigateTo = '/home/';
 
   // if (userForm.job === 'buildingControl'){
@@ -88,6 +92,49 @@ function queryRejectSuccess(tx)
   tx.executeSql("UPDATE APPLICATION SET appStatus='Rejected' WHERE applicationID = '" + appId + "'");
   app.dialog.alert("Application Rejected!");
 
+  var routeToNavigateTo = '/home/';
+
+  // if (userForm.job === 'buildingControl'){
+  //   routeToNavigateTo = '/bc-home/';
+  // }
+
+  app.router.navigate(routeToNavigateTo);
+}
+
+function updateInspec() {
+  var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
+
+db.transaction(queryUpdateInspec);
+console.log('in update success');
+}
+function queryUpdateInspec(tx)
+{
+  var appId = parseInt(mainView.router.currentRoute.params.applicationID);
+  tx.executeSql("UPDATE APPLICATION SET inspectionStatus='Approved' WHERE applicationID = '" + appId + "'");
+  app.dialog.alert("Inspection Approved!");
+ appStatus = true;
+  var routeToNavigateTo = '/home/';
+
+  // if (userForm.job === 'buildingControl'){
+  //   routeToNavigateTo = '/bc-home/';
+  // }
+
+  app.router.navigate(routeToNavigateTo);
+}
+
+function updateInspec() {
+  var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
+
+db.transaction(queryUpdateInspec);
+console.log('in update success');
+}
+function queryUpdateInspec(tx)
+{
+  var appId = parseInt(mainView.router.currentRoute.params.applicationID);
+
+  tx.executeSql("UPDATE APPLICATION SET inspectionStatus='Approved' WHERE applicationID = '" + appId + "'");
+  app.dialog.alert("Inspection Approved!");
+ appStatus = true;
   var routeToNavigateTo = '/home/';
 
   // if (userForm.job === 'buildingControl'){

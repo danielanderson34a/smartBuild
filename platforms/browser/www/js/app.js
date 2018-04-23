@@ -25,7 +25,7 @@ else {
 
 var test = false;
 var fetch = false;
-
+var appStatus = false;
 console.log(booked + 'booked');
 // Framework7 App main instance
 var app = new Framework7({
@@ -75,6 +75,10 @@ var app = new Framework7({
     {
       path: '/applications/:applicationID',
       url: './pages/application.html',
+    },
+    {
+      path: '/inspection/:applicationID',
+      url: './pages/inspection.html',
     },
     {
       path: '/bcApplications/',
