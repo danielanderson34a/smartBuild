@@ -27,6 +27,7 @@ var test = false;
 var fetch = false;
 var appStatus = false;
 console.log(booked + 'booked');
+
 // Framework7 App main instance
 var app = new Framework7({
   root: '#app', // App root element
@@ -48,6 +49,7 @@ var app = new Framework7({
       app.dialog.alert('Hello World!');
     },
   },
+
   // App routes
   routes: [
     // Load via Ajax
@@ -60,7 +62,12 @@ var app = new Framework7({
     }, {
       path: '/about/',
       url: './pages/about.html',
-    }, {
+    },
+    {
+      path: '/random/',
+      url: './pages/random.html',
+    },
+     {
       path: '/form/',
       url: './pages/form.html',
     },
@@ -138,6 +145,7 @@ function runExample() {
 
 $$(document).on('page:init', function(e) {
 
+//  window.open = cordova.InAppBrowser.open;
 
   console.log("Device is ready!");
 // opening Database
