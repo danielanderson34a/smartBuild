@@ -38,18 +38,15 @@ console.log('test1');
       console.log('new test' + test);
       window.sessionStorage.user = JSON.stringify(results.rows.item(0));
 
-       // window.location.href = 'home.html';
-       // window.location.replace("home.html");
-       // mainView.router.load(options.URL);
-       // myApp.router.findElement('#home');
        app.router.navigate('/home/');
-       // console.log(JSON.parse(window.sessionStorage.user).id + ' user obj');
+
        if (appStatus == true) {
          app.dialog.alert('Application Approved');
          appStatus = false;
        }
     }
   }
+
   function loginSuccess(db, results) {
     console.log('query executed');
     // console.log(db);

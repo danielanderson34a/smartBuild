@@ -94,9 +94,6 @@ function queryRejectSuccess(tx)
 
   var routeToNavigateTo = '/home/';
 
-  // if (userForm.job === 'buildingControl'){
-  //   routeToNavigateTo = '/bc-home/';
-  // }
 
   app.router.navigate(routeToNavigateTo);
 }
@@ -114,10 +111,6 @@ function queryUpdateInspec(tx)
   app.dialog.alert("Inspection Approved!");
  appStatus = true;
   var routeToNavigateTo = '/home/';
-
-  // if (userForm.job === 'buildingControl'){
-  //   routeToNavigateTo = '/bc-home/';
-  // }
 
   app.router.navigate(routeToNavigateTo);
 }

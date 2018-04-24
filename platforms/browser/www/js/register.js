@@ -42,8 +42,6 @@ $$(document).on('page:init', function(e) {
     }
   });
 
-
-
   function insertUser(db, userForm) {
     console.log('insertUser');
     var query = 'INSERT INTO USER ( firstName, lastName, userName, email, password, gender, dob, job) VALUES ("' + userForm.firstName + '", "' + userForm.lastName + '", "' + userForm.userName + '", "' + userForm.email + '", "' + userForm.password + '", "' + userForm.gender + '", "' + userForm.dob + '", "' + userForm.job + '")';
@@ -62,18 +60,11 @@ $$(document).on('page:init', function(e) {
 
   function insertUserSuccess(userForm) {
     console.log('sucess');
-    app.dialog.alert("User Registered");
+    app.dialog.alert("user Registered");
 
     var routeToNavigateTo = '/login/';
 
-    // if (userForm.job === 'buildingControl'){
-    //   routeToNavigateTo = '/bc-home/';
-    // }
-
     app.router.navigate(routeToNavigateTo);
 
-    // move to next page
-    // alert('User Succesfully Registered');
-    // window.location.href="/about/";
   }
 });

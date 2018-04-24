@@ -62,7 +62,7 @@ var applicationForm = {
 
 
   function insertApplication(db, applicationForm) {
-console.log('insertApplication');
+    console.log('insertApplication');
     var query = 'INSERT INTO APPLICATION ( userID, foreName, surname, address, townland, town, postcode, tel, appEmail, description, floorArea, water, amount, disability, signature, date, appStatus, inspectionStatus) VALUES ("' + applicationForm.userID + '", "' + applicationForm.foreName + '", "' + applicationForm.surname + '", "' + applicationForm.address + '", "' + applicationForm.townland + '", "' + applicationForm.town + '", "' + applicationForm.postcode + '", "' + applicationForm.tel + '", "' + applicationForm.appEmail + '", "' + applicationForm.description + '", "' + applicationForm.floorArea + '", "' + applicationForm.water + '", "' + applicationForm.amount + '", "' + applicationForm.disability + '", "' + applicationForm.signature + '", "' + applicationForm.date + '", "' + "Pending" + '", "' + "Pending" + '")';
     var results = ('SELECT * FROM APPLICATION');
     db.executeSql(query);
@@ -71,13 +71,8 @@ console.log('insertApplication');
 
   }
 
-  // function getuserid(tx, results) {
-  //   console.log('insert');
-  //   console.log(results.insertId);
-  // }
-
   function insertApplicationError(error) {
-console.log(error);
+    console.log(error);
     window.alert(error);
   }
 
@@ -88,26 +83,10 @@ console.log(error);
 
     app.router.navigate(routeToNavigateTo);
 
-    // var routeToNavigateTo = '/login/';
 
-    // if (userForm.job === 'buildingControl'){
-    //   routeToNavigateTo = '/bc-home/';
-    // }
-
-    // app.router.navigate(routeToNavigateTo);
-
-    // move to next page
-    // alert('User Succesfully Registered');
-    // window.location.href="/about/";
   }
 
-//   function queryDB(tx) {
-//     var results = ('SELECT * FROM APPLICATION');
-//     console.log(results);
-// }
 
-// Query the success callback
-//
 function querySuccess(tx, results) {
     var len = results.rows.length;
     console.log("DEMO table: " + len + " rows found.");
