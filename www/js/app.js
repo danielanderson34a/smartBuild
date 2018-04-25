@@ -197,7 +197,6 @@ function initUserTable(tx) {
     email text,
     password text,
     gender text,
-    dob text,
     job text
   )`);
 

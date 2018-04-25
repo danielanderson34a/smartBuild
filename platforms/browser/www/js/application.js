@@ -36,6 +36,8 @@ function queryApplicationSuccess(db, results) {
     console.log('into queryApplicationSuccess');
     var currentApp = results.rows.item(0);
 
+    $$('#app-ID').text("Application ID: " + currentApp.applicationID);
+
     $$('#app-title').text(currentApp.foreName + " " + currentApp.surname);
     $$('#app-forename').text(currentApp.foreName);
     $$('#app-surname').text(currentApp.surname);
@@ -158,7 +160,28 @@ function queryRejectInspec(tx)
 
   app.router.navigate(routeToNavigateTo);
 }
+function deleteApp() {
+  var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
+db.transaction(queryDeleteApp);
+
+}
+function queryDeleteApp(tx)
+{
+
+    var appId = parseInt(mainView.router.currentRoute.params.applicationID);
+    tx.executeSql("DELETE FROM APPLICATION Where applicationID = '" + appId + "'");
+    app.dialog.alert("Application Deleted!");
+    var routeToNavigateTo = '/home/';
+
+    // if (userForm.job === 'buildingControl'){
+    //   routeToNavigateTo = '/bc-home/';
+    // }
+
+    app.router.navigate(routeToNavigateTo);
+
+
+}
 function initApplication(tx) {
   application(tx);
 

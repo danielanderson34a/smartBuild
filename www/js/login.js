@@ -9,9 +9,13 @@ $$(document).on('page:init', function (e) {
 
     };
     // Checking for blank fields.
-    if (userName == '' || password == '') {
-      app.dialog.alert("Please fill all fields!");
-    } else {
+    if (userName == '') {
+      app.dialog.alert("Please Fill In Username!");
+    } else if (password == '') {
+      app.dialog.alert("Please Fill In Password!");
+
+    }
+     else {
       var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
       db.transaction(function(db) {
         checkCredentials(db, loginForm);
@@ -31,7 +35,7 @@ console.log('test1');
 
 
     if (results.rows.length === 0) {
-      app.dialog.alert('Invalid credentials');
+      app.dialog.alert('Invalid User');
     } else {
       console.log('success');
       test = true;
@@ -40,25 +44,12 @@ console.log('test1');
 
        app.router.navigate('/home/');
 
-       if (appStatus == true) {
-         app.dialog.alert('Application Approved');
-         appStatus = false;
-       }
+
     }
   }
 
   function loginSuccess(db, results) {
     console.log('query executed');
-    // console.log(db);
-    // console.log(results);
-    // console.log('hello');
-    // if (results.rows.length === 0) {
-    //   alert("credentials do not exist")
-    //   // fail the login
-    // } else {
-    // window.location.href = 'home.html'
-    //   // var currentUser = results.rows[0];
-    // }
   }
 
 
