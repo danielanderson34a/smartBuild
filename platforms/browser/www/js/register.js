@@ -1,7 +1,6 @@
 $$(document).on('page:init', function(e) {
-
+// gets inputs when clicked from register form
   $$("#register").click(function() {
-    console.log("info");
     var firstName = $$('#firstName').val();
     var lastName = $$('#lastName').val();
     var userName = $$('#userName').val();
@@ -21,9 +20,8 @@ $$(document).on('page:init', function(e) {
       job: job
     };
 
-    console.log(userForm);
-
-     if (firstName == '') {
+// checking for vblank fields
+    if (firstName == '') {
       app.dialog.alert("Please Fill In First Name Field!");
 
     } else if (lastName == '') {
@@ -32,7 +30,7 @@ $$(document).on('page:init', function(e) {
     } else if (userName == '') {
       app.dialog.alert("Please Fill In Username Field!");
 
-    }else if ( email == '') {
+    } else if (email == '') {
       app.dialog.alert("Please Fill In Email Field!");
 
     } else if (password == '') {
@@ -47,7 +45,6 @@ $$(document).on('page:init', function(e) {
       app.dialog.alert("Your passwords don't match. Try again?")
     } else {
       var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
-      console.log(db);
       db.transaction(function(db) {
         insertUser(db, userForm);
       }, insertUserError, function() {
@@ -55,25 +52,20 @@ $$(document).on('page:init', function(e) {
       });
     }
   });
-
+// inserting into database
   function insertUser(db, userForm) {
-    console.log('insertUser');
     var query = 'INSERT INTO USER ( firstName, lastName, userName, email, password, gender, job) VALUES ("' + userForm.firstName + '", "' + userForm.lastName + '", "' + userForm.userName + '", "' + userForm.email + '", "' + userForm.password + '", "' + userForm.gender + '",  "' + userForm.job + '")';
     db.executeSql(query, [], getuserid);
   }
 
   function getuserid(tx, results) {
-    console.log('insert');
-    console.log(results.insertId);
   }
 
   function insertUserError(error) {
-    console.log(error);
     window.alert(error);
   }
-
+// redirect on success
   function insertUserSuccess(userForm) {
-    console.log('sucess');
     app.dialog.alert("user Registered");
 
     var routeToNavigateTo = '/login/';

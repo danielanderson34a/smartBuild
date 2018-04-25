@@ -1,7 +1,6 @@
 // select * appliations statement
 function queryDB(tx) {
   tx.executeSql("SELECT * FROM APPLICATION", [], querySuccess, go);
-  console.log('select all');
 }
 
 // display all appliations - used for building control
@@ -37,8 +36,7 @@ function querySuccess(tx, results) {
     document.getElementById("tblBc").innerHTML = str;
   }
 }
+
 function go() {
-  console.log('go function');
- fetch = true;
- console.log(fetch);
+  fetch = true;
 }

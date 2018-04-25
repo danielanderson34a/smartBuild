@@ -1,12 +1,12 @@
 // Dom7
 var $$ = Dom7;
 var booked = false;
+
 function determineView() {
   var user = JSON.parse(window.sessionStorage.user);
 
 
   if (user.job === 'Construction') {
-    console.log('con worker');
     $$('.bc').hide();
     $$('.con').show();
   } else {
@@ -14,19 +14,18 @@ function determineView() {
     $$('.con').hide();
   }
 }
+
 function determineViews() {
-if (booked == true) {
-  $$('.showTable').show();
-}
-else {
-  $$('.showTable').hide();
-}
+  if (booked == true) {
+    $$('.showTable').show();
+  } else {
+    $$('.showTable').hide();
+  }
 }
 
 var test = false;
 var fetch = false;
 var appStatus = false;
-console.log(booked + 'booked');
 
 // Framework7 App main instance
 var app = new Framework7({
@@ -43,12 +42,8 @@ var app = new Framework7({
       }
     };
   },
-  // App root methods
-  methods: {
-    helloWorld: function() {
-      app.dialog.alert('Hello World!');
-    },
-  },
+
+
 
   // App routes
   routes: [
@@ -67,7 +62,7 @@ var app = new Framework7({
       path: '/random/',
       url: './pages/random.html',
     },
-     {
+    {
       path: '/form/',
       url: './pages/form.html',
     },
@@ -107,7 +102,7 @@ var app = new Framework7({
       path: '/createNotes/',
       url: './pages/createNotes.html',
     },
-     {
+    {
       path: '/home/',
       url: './pages/home.html',
       on: {
@@ -136,32 +131,27 @@ function runExample() {
   console.log("Run");
   var routeToNavigateTo = '/myApplications/';
   app.router.navigate(routeToNavigateTo);
-      // createDbAndTables();
-      // getAllTablesFromDB(getResultSetFromTable);
-    }
+
+}
 
 
 
-
+// on page load
 $$(document).on('page:init', function(e) {
 
-//  window.open = cordova.InAppBrowser.open;
 
-  console.log("Device is ready!");
-// opening Database
+  // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
   db.transaction(initTables);
   // db.transaction(initApplication);
 
-  console.log("Database opened");
-  console.log(test);
 
 
 });
 
-// create user table
+// create application table
 function initAppTable(tx) {
-    tx.executeSql(`CREATE TABLE IF NOT EXISTS APPLICATION (
+  tx.executeSql(`CREATE TABLE IF NOT EXISTS APPLICATION (
       applicationID integer primary key,
       userID text,
       foreName text,
@@ -187,7 +177,7 @@ function initAppTable(tx) {
     )`);
 }
 
-
+// create note user table
 function initUserTable(tx) {
   tx.executeSql(`CREATE TABLE IF NOT EXISTS USER (
     id integer primary key autoincrement,
@@ -201,7 +191,7 @@ function initUserTable(tx) {
   )`);
 
 }
-
+// create note table
 function initNoteTable(tx) {
   tx.executeSql(`CREATE TABLE IF NOT EXISTS NOTES (
     noteID integer primary key,
@@ -215,10 +205,10 @@ function initNoteTable(tx) {
 }
 
 
-
+// execute each function
 function initTables(tx) {
-	initAppTable(tx);
-	initUserTable(tx);
+  initAppTable(tx);
+  initUserTable(tx);
   initNoteTable(tx);
   queryDB(tx);
   deleteNote(tx);
@@ -226,76 +216,7 @@ function initTables(tx) {
     querySelectDB(tx);
     querySelectNotes(tx);
     querySelectInspec(tx);
-    console.log('heyyyyyyy');
   }
 
 
-}
-// function initApplication(tx){
-//   application(tx);
-// }
-
-
-
-
-function loadButtonApp(len){
-  console.log(len);
-}
-//create account form
-function createAccount() {
-  // This gets called whenever user submits the create account form
-  // validate form first
-  // if validation passes, save to db
-
-  var firstName = $$('#firstName').text(),
-    lastName = $$('#lastName').text(),
-  userName = $$('#userName').text(),
-    email = $$('#email').text(),
-    password = $$('#password').text(),
-    gender = $$('#gender').text(),
-    dob = $$('#dob').text(),
-    job = $$('#job').text();
-
-
-  var userForm = {
-    firstName: firstName,
-    lastName: lastName,
-    userName: userName,
-    email: email,
-    password: password,
-    gender: gender,
-    dob: dob,
-    job: job
-  };
-
-  var errors = validateForm(userForm);
-
-  if (errors.lebgth === 0) {
-    // no errors
-    var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
-    db.transaction(function(db) {
-      insertUser(db, userForm);
-    }, insertUserError, insertUserSuccess);
-  } else {
-    // show errors to user
-  }
-}
-
-
-
-function validateForm(userForm) {
-  var errors = [];
-
-  if (userForm.firstName === '') {
-    // add first name error (must be supplied)
-    errors.add('first name must be supplied')
-  }
-
-  if (userForm.lastName === '') {
-    // add last name error (must be supplied)
-    // $('#lastName').addClass('error');
-    errors.add('last name must be supplied');
-  }
-
-  return errors;
 }

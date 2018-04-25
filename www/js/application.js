@@ -1,39 +1,33 @@
 $$(document).on('page:init', function(e) {
   if (test == true) {
     var user = JSON.parse(window.sessionStorage.user);
-      if (user.job === 'Construction') {
-        console.log('con worker');
-        $$('.bc1').hide();
-        $$('.con1').show();
-      } else {
-        $$('.bc1').show();
-        $$('.con1').hide();
-      }
+    if (user.job === 'Construction') {
+      $$('.bc1').hide();
+      $$('.con1').show();
+    } else {
+      $$('.bc1').show();
+      $$('.con1').hide();
+    }
   }
 
 
 
-  console.log("Device is ready!");
-// opening Database
+  // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
   db.transaction(initApplication);
   // db.transaction(initApplication);
 
 });
-
+// select all application on appID
 function application(tx) {
   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
-  console.log(appId + 'dana dna');
-  console.log('APPLICATION: ' + appId);
   tx.executeSql("SELECT * FROM APPLICATION WHERE applicationID = '" + appId + "'", [], queryApplicationSuccess);
-  console.log('selected');
 
 }
-
+// displaying application full view on a seperate page
 function queryApplicationSuccess(db, results) {
   if (fetch == true) {
-    console.log('into queryApplicationSuccess');
     var currentApp = results.rows.item(0);
 
     $$('#app-ID').text("Application ID: " + currentApp.applicationID);
@@ -63,33 +57,33 @@ function queryApplicationSuccess(db, results) {
 if (application.appStatus) {
 
 }
+
 function updateStatus() {
+  // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
-db.transaction(queryUpdateSuccess);
-console.log('in update success');
+  db.transaction(queryUpdateSuccess);
 }
-function queryUpdateSuccess(tx)
-{
+// function for approving application
+function queryUpdateSuccess(tx) {
   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
   tx.executeSql("UPDATE APPLICATION SET appStatus='Approved' WHERE applicationID = '" + appId + "'");
   app.dialog.alert("Application Approved!");
- appStatus = true;
+  appStatus = true;
   var routeToNavigateTo = '/home/';
 
-  // if (userForm.job === 'buildingControl'){
-  //   routeToNavigateTo = '/bc-home/';
-  // }
 
   app.router.navigate(routeToNavigateTo);
 }
-function updateReject(){
+
+function updateReject() {
+  // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
-db.transaction(queryRejectSuccess);
+  db.transaction(queryRejectSuccess);
 }
-function queryRejectSuccess(tx)
-{
+//rejection application
+function queryRejectSuccess(tx) {
   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
   tx.executeSql("UPDATE APPLICATION SET appStatus='Rejected' WHERE applicationID = '" + appId + "'");
   app.dialog.alert("Application Rejected!");
@@ -101,108 +95,63 @@ function queryRejectSuccess(tx)
 }
 
 function updateInspec() {
+  // opening Database
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
-db.transaction(queryUpdateInspec);
-console.log('in update success');
+  db.transaction(queryUpdateInspec);
 }
-function queryUpdateInspec(tx)
-{
+//changing inspection status to approved
+function queryUpdateInspec(tx) {
   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
   tx.executeSql("UPDATE APPLICATION SET inspectionStatus='Approved' WHERE applicationID = '" + appId + "'");
   app.dialog.alert("Inspection Approved!");
- appStatus = true;
+  appStatus = true;
   var routeToNavigateTo = '/home/';
 
   app.router.navigate(routeToNavigateTo);
 }
 
-function updateInspec() {
-  var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
-
-db.transaction(queryUpdateInspec);
-console.log('in update success');
-}
-function queryUpdateInspec(tx)
-{
-  var appId = parseInt(mainView.router.currentRoute.params.applicationID);
-
-  tx.executeSql("UPDATE APPLICATION SET inspectionStatus='Approved' WHERE applicationID = '" + appId + "'");
-  app.dialog.alert("Inspection Approved!");
- appStatus = true;
-  var routeToNavigateTo = '/home/';
-
-  // if (userForm.job === 'buildingControl'){
-  //   routeToNavigateTo = '/bc-home/';
-  // }
-
-  app.router.navigate(routeToNavigateTo);
-}
-
+// changing inspection status
 function updateRejectInspec() {
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
-db.transaction(queryRejectInspec);
-console.log('in update success');
+  db.transaction(queryRejectInspec);
 }
-function queryRejectInspec(tx)
-{
+
+function queryRejectInspec(tx) {
   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
 
   tx.executeSql("UPDATE APPLICATION SET inspectionStatus='Rejected' WHERE applicationID = '" + appId + "'");
   app.dialog.alert("Inspection Rejected!");
- appStatus = true;
+  appStatus = true;
   var routeToNavigateTo = '/home/';
 
-  // if (userForm.job === 'buildingControl'){
-  //   routeToNavigateTo = '/bc-home/';
-  // }
 
   app.router.navigate(routeToNavigateTo);
 }
+// deleting application form
 function deleteApp() {
   var db = window.openDatabase('SmartBuildDB', '1.0', 'Smart Build Database', 200000);
 
-db.transaction(queryDeleteApp);
+  db.transaction(queryDeleteApp);
 
 }
-function queryDeleteApp(tx)
-{
 
-    var appId = parseInt(mainView.router.currentRoute.params.applicationID);
-    tx.executeSql("DELETE FROM APPLICATION Where applicationID = '" + appId + "'");
-    app.dialog.alert("Application Deleted!");
-    var routeToNavigateTo = '/home/';
+function queryDeleteApp(tx) {
 
-    // if (userForm.job === 'buildingControl'){
-    //   routeToNavigateTo = '/bc-home/';
-    // }
+  var appId = parseInt(mainView.router.currentRoute.params.applicationID);
+  tx.executeSql("DELETE FROM APPLICATION Where applicationID = '" + appId + "'");
+  app.dialog.alert("Application Deleted!");
+  var routeToNavigateTo = '/home/';
 
-    app.router.navigate(routeToNavigateTo);
+
+
+  app.router.navigate(routeToNavigateTo);
 
 
 }
+
 function initApplication(tx) {
   application(tx);
 
 }
-
-
-// $$(document).on('page:init', function(e) {
-//   var appId = parseInt(mainView.router.currentRoute.params.applicationID);
-//   console.log('APPLICATION: ' + appId);
-//
-//   // select * from applications where id = appId;
-//   // this will bring back a single row
-//   // store the row in var currentApp;
-//   // i.e. var currentApp = results.rows.item(0);(after DB query)
-//
-//   // this is temp, remove when query plugged in
-//   var currentApp = {
-//     foreName: 'Dan'
-//   };
-//
-//   // insert text into html elements using HTML ids and jQuery
-//   $$('#app-forename').text(currentApp.foreName);
-//
-// });

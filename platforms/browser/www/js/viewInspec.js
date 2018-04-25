@@ -1,13 +1,13 @@
+//select all from application on null
 function querySelectInspec(tx) {
 
-  // var currentID = JSON.parse(window.sessionStorage.user).id;
 
 
   tx.executeSql("SELECT * FROM APPLICATION WHERE inspectionTime IS NOT NULL", [], querInspecSuccess);
 
 
 }
-// display all appliations for one user
+// display all inspection for Building control
 function querInspecSuccess(db, results) {
   var len = results.rows.length,
     i;
@@ -30,7 +30,7 @@ function querInspecSuccess(db, results) {
     str += "<td class='text-success'>" + currentApp.inspectionStatus + "</td>";
 
 
-str += "</tr>";
+    str += "</tr>";
 
 
 
@@ -44,7 +44,5 @@ str += "</tr>";
 }
 
 function go() {
-  console.log('go function');
- fetch = true;
- console.log(fetch);
+  fetch = true;
 }

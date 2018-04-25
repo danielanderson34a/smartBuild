@@ -1,4 +1,3 @@
-
 function querySelectDB(tx) {
 
   var currentID = JSON.parse(window.sessionStorage.user).id;
@@ -10,7 +9,6 @@ function querySelectDB(tx) {
 }
 // display all appliations for one user
 function querySelectSuccess(db, results) {
-console.log('hvuvycttyctrtycrt');
   var len = results.rows.length,
     i;
 
@@ -31,13 +29,13 @@ console.log('hvuvycttyctrtycrt');
 
     str += "<td class='text-success'>" + currentApp.inspectionStatus + "</td>";
 
-str += "<tr>";
+    str += "<tr>";
     // str += "<tr >";
     if (currentApp.appStatus === 'Approved') {
       str += `<td clear="left" class='label-cell'><a style='float:right;' onclick='bookInspection(${appId})' class='button color-green link'>Book Inspection </a></td>`;
-    // str += "</tr>";
+      // str += "</tr>";
     }
-str += "</tr>";
+    str += "</tr>";
     str += "</tr>";
   }
 
@@ -45,9 +43,8 @@ str += "</tr>";
     document.getElementById("tblGridBody").innerHTML = str;
   }
 }
-
+// display dynamic popup for booking inspections
 function bookInspection(appId) {
-  console.log('booking inspec for ' + appId);
 
   var dynamicPopup = app.popup.create({
     content: `
@@ -77,14 +74,10 @@ function bookInspection(appId) {
                   <div class="item-title item-label">Select time</div>
                   <div class="item-input-wrap">
                     <select id="inspecDate">
-                      <option>09:00</option>
-                      <option>10:00</option>
                       <option>11:00</option>
                       <option>12:00</option>
                       <option>13:00</option>
                       <option>14:00</option>
-                      <option>15:00</option>
-                      <option>16:00</option>
                     </select>
                   </div>
                 </div>
@@ -103,9 +96,7 @@ function bookInspection(appId) {
 }
 
 function go() {
-  console.log('go function');
- fetch = true;
- console.log(fetch);
+  fetch = true;
 }
 
 function submitInspectionBooking(appId) {
@@ -117,12 +108,10 @@ function submitInspectionBooking(appId) {
 
   // update set inspection time = ? where id = appId;
 }
-
-function submitedInspection(tx, appId){
+// on success insert into database fields
+function submitedInspection(tx, appId) {
   var inspecDate = $$("#inspectionTime").val();
   var inspecTime = $$("#inspecDate").val();
-  console.log(inspecTime);
-  console.log('submitting inspection booking ' + appId);
   var submit = "UPDATE APPLICATION SET inspectionTime = '" + inspecDate + "' WHERE applicationID = '" + appId + "'";
   var submit1 = "UPDATE APPLICATION SET inspecDate = '" + inspecTime + "' WHERE applicationID = '" + appId + "'";
 
@@ -130,7 +119,5 @@ function submitedInspection(tx, appId){
   tx.executeSql(submit1);
 
   app.dialog.alert("Booking submited for: " + inspecDate + " At: " + inspecTime);
-
-
 
 }
